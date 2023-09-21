@@ -1,0 +1,14 @@
+{
+    "name": "mba-m2/bash-starters-main",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Jensone",
+            "email": "hello@jensone.com"
+        }
+    ],
+    "require": {
+        "fakerphp/faker": "^1.23",
+        "symfony/var-dumper": "^6.3"
+    }
+}
