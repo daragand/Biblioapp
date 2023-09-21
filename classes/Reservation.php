@@ -51,7 +51,11 @@ class Reservation {
         return $this->date_end;
     }
 
-    public function setDateEnd($date_end) {
+    public function setDateEnd() {
+        $dateEnd=new DateTime('now');
+        //on rajoute 28 jours pour la date de retour. une info qui pourrait être variable par la suite
+        $dateEnd = $dateEnd->add(new DateInterval('P28D'));
+        $date_end=$dateEnd->format('Y-m-d');
         $this->date_end = $date_end;
         return $this;
     }
@@ -112,10 +116,10 @@ class Reservation {
 
         if ($query === true){
             //on redirige vers la même page avec un message de succès
-            header('Location : reserver.php?success=1');
+            header('Location : reservations.php?success=1');
         }else{
             //on redirige vers la même page avec un message d'erreur
-            header('Location : reserver.php?success=0');
+            header('Location : reservations.php?success=0');
         }
     }
 //récupération des réservations

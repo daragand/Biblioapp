@@ -7,7 +7,7 @@ require 'Classes/Reservation.php';
 //récupération du livre via le slug
 $book = Book::getOneBook($_GET['slug']);
 
-//Pour la gestion de recherche du client
+//Pour la gestion de recherche du client.On recherche les clients puis on pourra ainsi sélectionner celui qui nous interesse. A voir pour l'appliquer avec handleInput dans le JS.
 if(isset($_POST['lastName']) && !empty($_POST['lastName'])){
     $resClts = Client::getClientByName($_POST['lastName']);
 }
@@ -24,7 +24,7 @@ if(isset($_POST['selectedClt']) && !empty($_POST['selectedClt'])){
     ;
    
     Reservation::addReservation($reservation);
-    // $reservation = Reservation::addReservation()
+   
    
 }
 
@@ -61,7 +61,7 @@ if(isset($_POST['selectedClt']) && !empty($_POST['selectedClt'])){
         </label><br />
        <?php endforeach ?>
  
-    <button type="submit" class="btn btn-success">Sélectionner</button>';
+    <button type="submit" class="btn btn-success">Effectuer la réservation</button>';
  </form>
 <?php endif ?>
 

@@ -174,6 +174,10 @@ class Book {
         //on retourne les livres
         return $books;
     }
+
+
+
+
 //une fonction static qui retournera un seul livre via le 
     public static function getOneBook($slug):array{
 
@@ -189,6 +193,21 @@ class Book {
 
         
     }
+    //Je recherche les livres en fonctions du titres pour faciliter la réservation
+    public static function getBooksByTitle($title):array{
+
+        //on exécute la connexion à la base de donnée
+        $db=Connect::Connect();
+
+        //on exécute la requête
+        $query=$db->prepare('SELECT * FROM book Where title=:title');
+        $query->bindValue(':title',$title, PDO::PARAM_STR);
+        $query->execute();
+        //on récupère le livre
+        return $query->fetch(PDO::FETCH_ASSOC);  
+    }
+
+
     //une fonction static pour ajouter un livre
     public static function addBook($obj):void{
         $sql="INSERT INTO book (title,author,category,description, year,isbn,slug)

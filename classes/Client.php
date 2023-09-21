@@ -104,7 +104,8 @@ class Client {
     public static function getClients():array{
         //requête SQL pour récupérer tous les livres
 
-        $sql="SELECT * FROM client";
+        $sql="SELECT * FROM client
+        ORDER BY lastname";
 
         //on exécute la connexion à la base de donnée
         $db=Connect::Connect();
@@ -132,7 +133,7 @@ class Client {
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    //fonction pour permettre le prêt par le nom
+    //fonction pour permettre le prêt par le nom. A lier au fichier JS avec l'idée du onChange.voir fonction handleClientId() et page reserver.php
     public static function getClientByName($name):array{
 
         //on exécute la connexion à la base de donnée
