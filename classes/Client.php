@@ -11,7 +11,7 @@ class Client {
     private ?string $address;
     private ?string $city;
     private ?string $country;
-    private ?string $deposit;
+    private ?float $deposit;
 
     public function getId() {
         return $this->id;
@@ -127,7 +127,7 @@ class Client {
 
         //on exécute la requête
         $query=$db->prepare('SELECT * FROM client Where id=:id');
-        $query->bindValue(':slug',$id, PDO::PARAM_STR);
+        $query->bindValue(':id',$id, PDO::PARAM_STR);
         $query->execute();
         //on récupère le livre
         return $query->fetch(PDO::FETCH_ASSOC);
@@ -188,5 +188,19 @@ class Client {
             header('Location : books.php?success=0');
         }
     }
+
+    //Paiement de la caution
+    public static function payDeposit($id,$deposit):void{
+    //on exécute la connexion à la base de donnée
+    $db=Connect::Connect();
+
+    //on stipule le montant de caution versé. 
+    $query=$db->prepare('UPDATE client SET deposit=:deposit Where id=:id');
+    $query->bindValue(':id',$id, PDO::PARAM_STR);
+    $query->bindValue(':deposit',$deposit, PDO::PARAM_STR);
+    $query->execute();
+    
+    }
+
 }
 
